@@ -215,10 +215,8 @@ std::vector<float> Image::filterCore(const Kernel& kernel) const
                 for (int w = -s; w <= s; w++) {
                 	pixelSum += maskPtr[(w + s) + filterRowIndex] *
                                 paddedImagePtr[w + j + sourceImgRowIndex];
-                    // std::cout << sourceImgRowIndex << " " << sourceImgRowIndex << "  -  "<< maskPtr[(w + s) + filterRowIndex] << " || "<< paddedImagePtr[w + j + sourceImgRowIndex] << "\n";
                 }
         	}
-            // std::cout << pixelSum << "\n";
             if (pixelSum < 0) {
             	pixelSum = 0;
             }
@@ -269,19 +267,8 @@ bool Image::multithreadFilter(Image& resultingImage, const Kernel& kernel)
     float* newImagePtr = {newImage.data()};
 
     bool result = false;
-    
-    std::cout << "\n";
-    for (int i = 0; i < 10; i++) {
-            std::cout << newImagePtr[10*i] << std::endl;
-    }
-
     result = runKernel(paddedImagePtr, newImagePtr, MkernelPtr, width, height,
                         width + floor(filterWidth / 2) * 2, height + floor(filterHeight / 2) * 2, filterWidth, filterHeight);
-    
-    std::cout << "                 " << result << "\n";
-    for (int i = 0; i < 10; i++) {
-            std::cout << newImagePtr[10*i] << std::endl;
-    }
 
      if (!result) {
     	std::cerr << "Error while executing CUDA filtering" << std::endl;

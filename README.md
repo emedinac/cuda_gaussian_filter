@@ -8,9 +8,21 @@ This repository contains a CUDA C++ application that applies a kernel filter. I 
 sudo apt install libpng++-dev
 make
 ```
+to clean the exe. Please run:
+```
+make
+```
 
 # Usage: 
 
 ```
-./kernel_convolution filter_type image_path cuda_mem_tye
+./bin/kernel_convolution image_path kernel_size std_gaussian
+```
+
+Some examples:
+
+```
+./bin/kernel_convolution data/gauss.png 3 1
+./bin/kernel_convolution data/gauss.png 5 3
+./bin/kernel_convolution data/gauss.png 15 10
 ```
